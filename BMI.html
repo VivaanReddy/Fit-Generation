@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator - Physical Health Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #000000; /* Black background */
+            margin: 0;
+            padding: 0;
+            color: #ffffff; /* White text */
+        }
+
+        /* Header */
+        header {
+            background-color: transparent;
+            color: #ffffff;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        /* Navigation Bar */
+        .topnav {
+            background-color: #007BFF; /* Blue navbar */
+            text-align: center;
+            padding: 12px 0;
+            width: 100%;
+            border-bottom: 2px solid white;
+        }
+        .topnav a {
+            display: inline-block;
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+        .topnav a:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            color: #ffffff;
+        }
+        .topnav a.active {
+            background-color: #004bb5; /* Darker blue for active link */
+            color: white;
+        }
+
+        /* Content */
+        .content {
+            padding: 50px;
+            text-align: center;
+        }
+        .content h2 {
+            color: #ffffff; /* White headings */
+            font-size: 2.5em;
+        }
+
+        /* Form Container */
+        .form-container {
+            background-color: transparent;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            margin: 30px auto;
+            border-radius: 8px;
+            width: 60%;
+            max-width: 500px;
+            border: 2px solid #007BFF; /* Blue border */
+        }
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1.1em;
+            background-color: black; /* Black input field */
+            border: 1px solid #007BFF; /* Blue border */
+            color: white; /* White text */
+            border-radius: 4px;
+        }
+        .form-container input::placeholder {
+            color: #bbb; /* Light grey placeholder text */
+        }
+
+        /* Button */
+        .form-container button {
+            background-color: #007BFF; /* Blue button */
+            color: white;
+            padding: 15px 25px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .form-container button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        /* BMI Result */
+        .result {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #007BFF;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>BMI Calculator</h1>
+    </header>
+
+    <!-- Navigation Bar -->
+    <div class="topnav">
+        <a class="active" href="homepage.html">Home</a>
+        <a href="healthtips.html">Health Tips</a>
+        <a href="file:///C:/Users/vivaa/Downloads/Design%20e%20port%202/Sleep.html">Sleep</a>
+        <a href="BMI.html">BMI Calculator</a>
+        <a href="Aboutus.html">About Us</a>
+     
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <h2>Calculate Your BMI</h2>
+        <p>Enter your weight and height to calculate your Body Mass Index (BMI). Your BMI will give you an idea of whether you are underweight, normal weight, overweight, or obese.</p>
+
+        <div class="form-container">
+            <form id="bmiForm">
+                <input type="number" id="weight" placeholder="Enter your weight (kg)" required>
+                <input type="number" id="height" placeholder="Enter your height (cm)" required>
+                <button type="submit">Calculate BMI</button>
+            </form>
+            <div class="result" id="bmiResult"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&nbsp;</p>
+    </footer>
+
+    <script>
+        document.getElementById('bmiForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get the user's weight and height
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value) / 100; // convert cm to meters
+
+            // Check if the inputs are valid
+            if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+                document.getElementById('bmiResult').textContent = "Please enter valid numbers.";
+                return;
+            }
+
+            // Calculate BMI
+            const bmi = weight / (height * height);
+
+            // Determine BMI category
+            let category = "";
+            if (bmi < 18.5) {
+                category = "Underweight";
+            } else if (bmi >= 18.5 && bmi <= 24.9) {
+                category = "Normal weight";
+            } else if (bmi >= 25 && bmi <= 29.9) {
+                category = "Overweight";
+            } else {
+                category = "Obese";
+            }
+
+            // Display the result
+            document.getElementById('bmiResult').textContent = `Your BMI is ${bmi.toFixed(2)}. Category: ${category}`;
+        });
+    </script>
+
+</body>
+</html>
